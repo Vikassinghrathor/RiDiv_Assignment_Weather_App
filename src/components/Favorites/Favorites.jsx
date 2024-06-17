@@ -22,7 +22,7 @@ const Favorites = ({ favorites, fetchWeather, addFavorite, removeFavorite }) => 
 
   return (
     <div className="favorites">
-      <h3 style={{marginRight: "80px"}}>Favorites</h3>
+      <h3>Favorites</h3>
       <div className="add-favorite">
         <input
           type="text"

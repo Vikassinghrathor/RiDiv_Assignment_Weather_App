@@ -10,7 +10,6 @@ const WeatherDashboard = () => {
   const [forecast, setForecast] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [unit, setUnit] = useState('metric');
-  const [unitSymbol, setUnitSymbol] = useState('C');
   const [error, setError] = useState(null);
 
   const fetchWeather = async (city) => {
@@ -50,16 +49,6 @@ const WeatherDashboard = () => {
     fetchFavorites();
   };
 
-  const toggleUnit = () => {
-    if (unit === 'metric') {
-      setUnit('imperial');
-      setUnitSymbol('F');
-    } else {
-      setUnit('metric');
-      setUnitSymbol('C');
-    }
-  };
-
   useEffect(() => {
     fetchFavorites();
     const lastSearchedCity = localStorage.getItem('lastSearchedCity');
@@ -78,13 +67,13 @@ const WeatherDashboard = () => {
           <Search fetchWeather={fetchWeather} />
         </div>
         <div className="unit-toggle">
-          <button onClick={toggleUnit}>
+          <button onClick={() => setUnit(unit === 'metric' ? 'imperial' : 'metric')}>
             Switch to {unit === 'metric' ? 'Fahrenheit' : 'Celsius'}
           </button>
         </div>
       </div>
       <div className="weather-display-container">
-        <WeatherDisplay weather={weather} forecast={forecast} unitSymbol={unitSymbol} />
+        <WeatherDisplay weather={weather} forecast={forecast} />
         {error && <div className="error">{error}</div>}
       </div>
     </div>
